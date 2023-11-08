@@ -1,0 +1,24 @@
+name: GitGuardian Scan
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  gitguardian-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install GitGuardian CLI
+        run: |
+          curl -sSL https://raw.githubusercontent.com/GitGuardian/gg-shield/main/install.sh | bash
+
+      - name: Scan for Secrets
+        env:
+          GG_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+        run: ggshield scan
+
+      - name: Print Git Guardian
+        run: echo "Git Guardian"
+      # Add more steps as needed...
