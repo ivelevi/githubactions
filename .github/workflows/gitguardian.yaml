@@ -7,7 +7,7 @@ on:
 
 jobs:
   gitguardian-scan:
-    runs-on: redhat-latest
+    runs-on: redhat/ubi8-init
 
     steps:
       - name: Install GitGuardian CLI
