@@ -16,11 +16,14 @@ jobs:
           'https://dl.cloudsmith.io/public/gitguardian/ggshield/setup.deb.sh' \
           | sudo -E bash
           
-
-      - name: Scan for Secrets
+      - name: Run Git Guardian
+        uses: GitGuardian/ggshield-action@master
         env:
-          GG_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
-        run: ggshield scan
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+#      - name: Scan for Secrets
+#        env:
+#          GG_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+#        run: ggshield scan
 
       - name: Print Git Guardian
         run: echo "Git Guardian"
