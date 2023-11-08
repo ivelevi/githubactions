@@ -7,13 +7,13 @@ on:
 
 jobs:
   gitguardian-scan:
-    runs-on: redhat/ubi8-init
+    runs-on: debian-latest
 
     steps:
       - name: Install GitGuardian CLI
         run: |
           curl -1sLf \
-          'https://dl.cloudsmith.io/public/gitguardian/ggshield/setup.rpm.sh' \
+          'https://dl.cloudsmith.io/public/gitguardian/ggshield/setup.deb.sh' \
           | sudo -E bash
           
 
