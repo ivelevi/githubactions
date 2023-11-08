@@ -12,7 +12,10 @@ jobs:
     steps:
       - name: Install GitGuardian CLI
         run: |
-          curl -sSL https://raw.githubusercontent.com/GitGuardian/gg-shield/main/install.sh 
+          curl -1sLf \
+          'https://dl.cloudsmith.io/public/gitguardian/ggshield/setup.rpm.sh' \
+          | sudo -E bash
+          
 
       - name: Scan for Secrets
         env:
@@ -22,3 +25,4 @@ jobs:
       - name: Print Git Guardian
         run: echo "Git Guardian"
       # Add more steps as needed... | bash
+      #curl -sSL https://raw.githubusercontent.com/GitGuardian/gg-shield/main/install.sh
