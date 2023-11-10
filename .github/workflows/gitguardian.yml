@@ -45,7 +45,7 @@ jobs:
       - name: Run SonarQube Scanner
         env:
           SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
-          SONARQUBE_PROJECT_KEY: "ivelevi"
+          SONARQUBE_PROJECT_KEY: "ivelevi_githubactions"
         run: |
           /opt/sonar-scanner/bin/sonar-scanner \
             -Dsonar.projectKey=$SONARQUBE_PROJECT_KEY \
