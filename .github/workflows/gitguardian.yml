@@ -32,10 +32,10 @@ jobs:
       - name: Run SonarQube Scanner
         env:
           SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
-          SONARQUBE_PROJECT_KEY: <your-project-key>
+          SONARQUBE_PROJECT_KEY: "ivelevi"
         run: |
           sonar-scanner \
             -Dsonar.projectKey=$SONARQUBE_PROJECT_KEY \
-            -Dsonar.organization=<your-organization-key> \
+            -Dsonar.organization="ivelevi" \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONARQUBE_TOKEN
