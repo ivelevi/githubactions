@@ -64,6 +64,7 @@ jobs:
           status=$(curl -s -u $SONAR_TOKEN: $SONARQUBE_SERVER_URL/api/qualitygates/project_status?projectKey=$SONAR_PROJECT_KEY | jq -r '.projectStatus.status')
           echo $status
           if [ "$status" != "OK" ]; then
+            echo "status is"
             echo $status
             echo "/"
             echo "Quality Gate check failed. SonarQube analysis did not meet the quality gate conditions."
