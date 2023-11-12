@@ -1,4 +1,4 @@
-name: SonarQube Analysis
+name: Pipeline
 
 on:
   push:
@@ -68,6 +68,11 @@ jobs:
             exit 1
           fi
 
+  gitguardian:
+    name: GitGuardian scan
+    runs-on: ubuntu-latest
+
+    steps:
       - name: GitGuardian scan
         uses: GitGuardian/ggshield/actions/secret@main
         env:
