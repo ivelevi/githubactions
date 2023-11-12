@@ -52,3 +52,14 @@ jobs:
             -Dsonar.organization=ivelevi \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN
+
+      - name: Check SonarQube Quality Gate
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONARQUBE_PROJECT_KEY: ivelevi_githubactions
+        run: |
+          status=$(curl -s -u $SONAR_TOKEN: $SONARQUBE_SERVER_URL/api/qualitygates/project_status?projectKey=$SONARQUBE_PROJECT_KEY | jq -r '.projectStatus.status')
+          if [ "$status" != "OK" ]; then
+            echo "Quality Gate check failed. SonarQube analysis did not meet the quality gate conditions."
+            exit 1
+          fi
