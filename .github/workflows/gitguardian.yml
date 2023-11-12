@@ -44,11 +44,11 @@ jobs:
 
       - name: Run SonarQube Scanner
         env:
-          SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
-          SONARQUBE_PROJECT_KEY: "ivelevi_githubactions"
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONARQUBE_PROJECT_KEY: ivelevi_githubactions
         run: |
           /opt/sonar-scanner/bin/sonar-scanner \
-            -Dsonar.projectKey="ivelevi_githubactions" \
-            -Dsonar.organization="ivelevi" \
+            -Dsonar.projectKey=ivelevi_githubactions \
+            -Dsonar.organization=ivelevi \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN
