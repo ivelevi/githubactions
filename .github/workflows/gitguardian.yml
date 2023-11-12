@@ -63,10 +63,13 @@ jobs:
         run: |
           status=$(curl -s -u $SONAR_TOKEN: https://sonarcloud.io/api/qualitygates/project_status?projectKey=$SONAR_PROJECT_KEY | jq -r '.projectStatus.status')
           echo $status
-          if [ "$status" != "OK" ]; then
-            echo "status is"
-            echo $status
-            echo "/"
+          if [ "$status" = "OK" ]; then
             echo "Quality Gate check failed. SonarQube analysis did not meet the quality gate conditions."
             exit 1
           fi
+
+      - name: Install GitGuardian CLI
+        run: |
+          curl -1sLf \
+          'https://dl.cloudsmith.io/public/gitguardian/ggshield/setup.deb.sh' \
+          | sudo -E bash
