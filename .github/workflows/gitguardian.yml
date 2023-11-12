@@ -23,6 +23,9 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
+      - name: Install jq
+        run: sudo apt-get install jq
+
       - name: Cache SonarScanner
         uses: actions/cache@v2
         with:
