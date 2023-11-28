@@ -19,7 +19,7 @@ jobs:
 
       - name: Build #and Test
         run: |
-          docker build -t my-app .
+          docker build -t my-app:${GITHUB_RUN_NUMBER} .
         #docker run my-app python -m pytest
 
       #- name: Run Docker image
