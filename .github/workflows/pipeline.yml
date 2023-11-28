@@ -17,6 +17,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Build #and Test
+        run: |
+          docker build -t my-app .
+        #docker run my-app python -m pytest
+
+      #- name: Run Docker image
+      #  run: docker run --user myuser my-app python -m pytest
+
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
