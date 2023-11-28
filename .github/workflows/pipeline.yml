@@ -75,6 +75,15 @@ jobs:
             exit 1
           fi
 
+      - name: Docker Login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_TOKEN}}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - name: Docker Push
+        run: docker push my-app:${GITHUB_RUN_NUMBER}
+
   gitguardian:
     name: GitGuardian scan
     runs-on: ubuntu-latest
