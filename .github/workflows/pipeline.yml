@@ -36,6 +36,7 @@ jobs:
           echo $ref
           echo "/"
           echo ${{ github.repository }}
+          echo "/"
           echo $repository
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
