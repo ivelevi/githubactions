@@ -19,7 +19,7 @@ jobs:
 
       - name: Build #and Test
         run: |
-          docker build -t ivelevi/my-app:${GITHUB_RUN_NUMBER} .
+          docker build -t devops-${{ github.repository }}:${GITHUB_RUN_NUMBER} .
         #docker run my-app python -m pytest
 
       - name: Print Repository Information
