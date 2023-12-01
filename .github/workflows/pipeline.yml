@@ -14,8 +14,8 @@ jobs:
       - name: Cleanup
         uses: rtCamp/action-cleanup@master
 
-      - name: Deploy
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Create env
         run: |
