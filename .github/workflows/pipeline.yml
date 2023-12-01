@@ -27,7 +27,7 @@ jobs:
           then
             echo "::set-env name=label::staging"
           else
-            echo "::set-env name=label::latest"
+            echo "::set-env name=label::-prod-${{ github.run_number }}"
           fi
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
