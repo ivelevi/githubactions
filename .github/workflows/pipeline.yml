@@ -2,7 +2,7 @@ name: ONHOST DEPLOYMENT
 
 on:
   push:
-    branches: [ master, dev, staging ]
+    branches: [ main, dev, staging ]
 
 jobs:
 
