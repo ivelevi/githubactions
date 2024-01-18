@@ -100,7 +100,7 @@ jobs:
           # Run ZAP scan command
           # unsafe sites https://owasp.org/www-project-webgoat/ http://www.dvwa.co.uk/
           # safe sites https://google-gruyere.appspot.com/ 
-          docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://https://github.com"
+          docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://www.hp.com/br-pt/home.html"
         continue-on-error: true
 
       - name: Upload ZAP scan report
