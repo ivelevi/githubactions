@@ -97,7 +97,7 @@ jobs:
         run: |
           # Pull the OWASP ZAP Docker image
           echo "teste" > /zap/wrk/zap.yaml
-          sudo chmod 777 /zap/wrk/zap.yaml
+          #sudo chmod 777 /zap/wrk/zap.yaml
           if [ -d "/zap/wrk" ]; then
             echo "Folder /zap/wrk already exists. Doing nothing."
           else
