@@ -99,7 +99,8 @@ jobs:
           docker pull owasp/zap2docker-stable:latest
           
           # Run ZAP scan command
-          docker run --rm -t owasp/zap2docker-stable:latest zap-baseline.py -t "https://webgoat.herokuapp.com" -r report.html
+          #docker run --rm -t owasp/zap2docker-stable:latest zap-baseline.py -t "https://webgoat.herokuapp.com" -r report.html
+          docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://webgoat.herokuapp.com" -r report.html
 
       - name: Upload ZAP scan report
         uses: actions/upload-artifact@v2
