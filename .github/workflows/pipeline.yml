@@ -96,14 +96,7 @@ jobs:
       - name: Run OWASP ZAP scan
         run: |
           # Pull the OWASP ZAP Docker image
-          echo "teste" > /zap/wrk/zap.yaml
-          #sudo chmod 777 /zap/wrk/zap.yaml
-          if [ -d "/zap/wrk" ]; then
-            echo "Folder /zap/wrk already exists. Doing nothing."
-          else
-          sudo mkdir -p "/zap/wrk"
-          echo "Folder /zap/wrk created successfully."
-          fi
+
           
           docker pull owasp/zap2docker-stable:latest
           # Run ZAP scan command
