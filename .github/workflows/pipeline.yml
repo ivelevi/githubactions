@@ -96,16 +96,9 @@ jobs:
       - name: Run OWASP ZAP scan
         run: |
           # Pull the OWASP ZAP Docker image
-
-          
           docker pull owasp/zap2docker-stable:latest
           # Run ZAP scan command
-          #docker run --rm -t owasp/zap2docker-stable:latest zap-baseline.py -t "https://webgoat.herokuapp.com" -r report.html
-          
           docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://webgoat.herokuapp.com"
-          
-          #docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://www.google.com" -r report.html
-          #docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://webgoat.herokuapp.com" -r report.html
         continue-on-error: true
 
       - name: Upload ZAP scan report
@@ -113,3 +106,7 @@ jobs:
         with:
           name: zap-report
           path: report.html
+
+            #docker run --rm -t owasp/zap2docker-stable:latest zap-baseline.py -t "https://webgoat.herokuapp.com" -r report.html
+          #docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://www.google.com" -r report.html
+          #docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://webgoat.herokuapp.com" -r report.html
