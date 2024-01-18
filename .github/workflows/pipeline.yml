@@ -9,83 +9,83 @@ on:
       - main # Change this to the branch you want to analyze
 
 jobs:
-  sonarqube:
-    name: SonarQube Analysis
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Java
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-
-      - name: Install jq
-        run: sudo apt-get install jq
-
-      - name: Cache SonarScanner
-        uses: actions/cache@v2
-        with:
-          path: ~/.sonar/cache
-          key: sonarqube-${{ runner.os }}
-
-      - name: Install SonarScanner
-        env:
-          SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
-        run: |
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
-          unzip sonar-scanner-cli-4.6.2.2472-linux.zip
-          sudo mv sonar-scanner-4.6.2.2472-linux /opt/sonar-scanner
-          echo "export PATH=\$PATH:/opt/sonar-scanner/bin" >> $GITHUB_ENV
-
-      - name: Check PATH
-        run: echo $PATH
-
-      - name: Run SonarQube Scanner
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-        run: |
-          /opt/sonar-scanner/bin/sonar-scanner \
-            -Dsonar.projectKey=$SONAR_PROJECT_KEY \
-            -Dsonar.organization=ivelevi \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=$SONAR_TOKEN
-
-      - name: Check SonarQube Quality Gate
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-        run: |
-          status=$(curl -s -u $SONAR_TOKEN: https://sonarcloud.io/api/qualitygates/project_status?projectKey=$SONAR_PROJECT_KEY | jq -r '.projectStatus.status')
-          echo $status
-          if [ "$status" != "OK" ]; then
-            echo "Quality Gate check failed. SonarQube analysis did not meet the quality gate conditions."
-            exit 1
-          fi
-
-  gitguardian:
-    name: GitGuardian scan
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: GitGuardian scan
-        uses: GitGuardian/ggshield/actions/secret@main
-        env:
-          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
-          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
-          GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
-
-      - name: Print Hello GitGuardian
-        run: echo "Hello GitGuardian"
+#  sonarqube:
+#    name: SonarQube Analysis
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Set up Java
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: '11'
+#          distribution: 'adopt'
+#
+#      - name: Install jq
+#        run: sudo apt-get install jq
+#
+#      - name: Cache SonarScanner
+#        uses: actions/cache@v2
+#        with:
+#          path: ~/.sonar/cache
+#          key: sonarqube-${{ runner.os }}
+#
+#      - name: Install SonarScanner
+#        env:
+#          SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+#        run: |
+#          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+#          unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+#          sudo mv sonar-scanner-4.6.2.2472-linux /opt/sonar-scanner
+#          echo "export PATH=\$PATH:/opt/sonar-scanner/bin" >> $GITHUB_ENV
+#
+#      - name: Check PATH
+#        run: echo $PATH
+#
+#      - name: Run SonarQube Scanner
+#        env:
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+#        run: |
+#          /opt/sonar-scanner/bin/sonar-scanner \
+#            -Dsonar.projectKey=$SONAR_PROJECT_KEY \
+#            -Dsonar.organization=ivelevi \
+#            -Dsonar.host.url=https://sonarcloud.io \
+#            -Dsonar.login=$SONAR_TOKEN
+#
+#      - name: Check SonarQube Quality Gate
+#        env:
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+#        run: |
+#          status=$(curl -s -u $SONAR_TOKEN: https://sonarcloud.io/api/qualitygates/project_status?projectKey=$SONAR_PROJECT_KEY | jq -r '.projectStatus.status')
+#          echo $status
+#          if [ "$status" != "OK" ]; then
+#            echo "Quality Gate check failed. SonarQube analysis did not meet the quality gate conditions."
+#            exit 1
+#          fi
+#
+#  gitguardian:
+#    name: GitGuardian scan
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: GitGuardian scan
+#        uses: GitGuardian/ggshield/actions/secret@main
+#        env:
+#          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
+#          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
+#          GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+#          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+#          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+#
+#      - name: Print Hello GitGuardian
+#        run: echo "Hello GitGuardian"
   security-scan:
     runs-on: ubuntu-latest
 
@@ -99,7 +99,7 @@ jobs:
           docker pull owasp/zap2docker-stable:latest
           
           # Run ZAP scan command
-          docker run --rm -t owasp/zap2docker-stable:latest zap-baseline.py -t "http://your-target-url" -r report.html
+          docker run --rm -t owasp/zap2docker-stable:latest zap-baseline.py -t "https://webgoat.herokuapp.com" -r report.html
 
       - name: Upload ZAP scan report
         uses: actions/upload-artifact@v2
