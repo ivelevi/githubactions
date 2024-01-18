@@ -98,7 +98,8 @@ jobs:
           # Pull the OWASP ZAP Docker image
           docker pull owasp/zap2docker-stable:latest
           # Run ZAP scan command
-          docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "http://www.dvwa.co.uk/"
+          # https://owasp.org/www-project-webgoat/ http://www.dvwa.co.uk/
+          docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://owasp.org/www-project-webgoat/"
         continue-on-error: true
 
       - name: Upload ZAP scan report
