@@ -100,7 +100,10 @@ jobs:
           
           # Run ZAP scan command
           #docker run --rm -t owasp/zap2docker-stable:latest zap-baseline.py -t "https://webgoat.herokuapp.com" -r report.html
-          docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://www.google.com" -r report.html
+          
+          docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://www.google.com"
+          
+          #docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://www.google.com" -r report.html
           #docker run --rm -v $(pwd):/zap/wrk owasp/zap2docker-stable:latest zap-baseline.py -t "https://webgoat.herokuapp.com" -r report.html
 
       - name: Upload ZAP scan report
